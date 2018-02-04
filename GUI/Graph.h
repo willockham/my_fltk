@@ -157,20 +157,22 @@ public:
     Point point(int i) const { return points[i]; } // read only access to points
     int number_of_points() const { return int(points.size()); }
 
+    Shape(const Shape&) = delete;               // prevent copying
+    Shape& operator=(const Shape&) = delete;
+
     virtual ~Shape() { }
 protected:
     Shape();    
+    Shape(initializer_list<Point> lst);
+
     virtual void draw_lines() const;   // draw the appropriate lines
     void add(Point p);                 // add p to points
     void set_point(int i,Point p);     // points[i]=p;
 private:
     vector<Point> points;              // not used by all shapes
     Color lcolor;                      // color for lines and characters
-    Line_style ls; 
-    Color fcolor;                      // fill color
-
-    Shape(const Shape&);               // prevent copying
-    Shape& operator=(const Shape&);
+    Line_style ls {0}; 
+    Color fcolor {Color::invisible};                      // fill color
 };
 
 //------------------------------------------------------------------------------
