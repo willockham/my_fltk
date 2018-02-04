@@ -162,7 +162,7 @@ public:
 
     virtual ~Shape() { }
 protected:
-    Shape();    
+    Shape() { };    
     Shape(initializer_list<Point> lst);
 
     virtual void draw_lines() const;   // draw the appropriate lines

@@ -15,14 +15,6 @@ namespace Graph_lib {
 
 //------------------------------------------------------------------------------
 
-Shape::Shape() : 
-    lcolor(fl_color()),      // default color for lines and characters
-    ls(0),                   // default style
-    fcolor(Color::invisible) // no fill
-{}
-
-//------------------------------------------------------------------------------
-
 Shape::Shape(initializer_list<Point> lst) {
     for (Point p : lst) add(p);
 }
