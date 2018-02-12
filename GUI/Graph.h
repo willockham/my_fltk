@@ -170,9 +170,9 @@ protected:
     void set_point(int i,Point p);     // points[i]=p;
 private:
     vector<Point> points;              // not used by all shapes
-    Color lcolor{Fl_Color()};                      // color for lines and characters
+    Color lcolor{(int)fl_color()};          // color for lines and characters
     Line_style ls {0}; 
-    Color fcolor {Color::invisible};                      // fill color
+    Color fcolor {Color::invisible};  // fill color
 };
 
 //------------------------------------------------------------------------------
