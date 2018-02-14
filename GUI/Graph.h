@@ -161,9 +161,9 @@ public:
     Shape& operator=(const Shape&) = delete;
 
     virtual ~Shape() { }
-    Shape(initializer_list<Point> lst);
 protected:
     Shape() { };    
+    Shape(initializer_list<Point> lst);
 
     virtual void draw_lines() const;   // draw the appropriate lines
     void add(Point p);                 // add p to points
@@ -216,7 +216,9 @@ private:
 //------------------------------------------------------------------------------
 
 struct Open_polyline : Shape {         // open sequence of lines
-    using Shape::Shape;
+    // using Shape::Shape nie działa bo kopiuje też dostęp protected i Open_polyline nie może konstruować
+    Open_polyline() {};
+    Open_polyline(initializer_list<Point> lst) : Shape(lst) {};
     void add(Point p) { Shape::add(p); }
     void draw_lines() const;
 };
@@ -224,6 +226,7 @@ struct Open_polyline : Shape {         // open sequence of lines
 //------------------------------------------------------------------------------
 
 struct Closed_polyline : Open_polyline { // closed sequence of lines
+    // using ma dostęp do publicznych konstruktorów Open_polyline
     using Open_polyline::Open_polyline;
     void draw_lines() const;
 };
