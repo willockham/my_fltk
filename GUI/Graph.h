@@ -161,9 +161,9 @@ public:
     Shape& operator=(const Shape&) = delete;
 
     virtual ~Shape() { }
+    Shape(initializer_list<Point> lst);
 protected:
     Shape() { };    
-    Shape(initializer_list<Point> lst);
 
     virtual void draw_lines() const;   // draw the appropriate lines
     void add(Point p);                 // add p to points
@@ -216,6 +216,7 @@ private:
 //------------------------------------------------------------------------------
 
 struct Open_polyline : Shape {         // open sequence of lines
+    using Shape::Shape;
     void add(Point p) { Shape::add(p); }
     void draw_lines() const;
 };
@@ -223,6 +224,7 @@ struct Open_polyline : Shape {         // open sequence of lines
 //------------------------------------------------------------------------------
 
 struct Closed_polyline : Open_polyline { // closed sequence of lines
+    using Open_polyline::Open_polyline;
     void draw_lines() const;
 };
 
@@ -301,7 +303,7 @@ struct Ellipse : Shape {
         add(Point(p.x-w,p.y-h));
     }
 
-    void draw_lines() const;
+    virtual void draw_lines() const;
 
     Point center() const { return Point(point(0).x+w,point(0).y+h); }
     Point focus1() const { return Point(center().x+int(sqrt(double(w*w-h*h))),center().y); }
@@ -311,10 +313,33 @@ struct Ellipse : Shape {
     int major() const { return w; }
     void set_minor(int hh) { h=hh; }
     int minor() const { return h; }
-private:
+protected:
     int w;
     int h;
 };
+
+struct Arc : Ellipse {
+    Arc(Point pp, int ww, int hh, int dp, int dk)
+        : Ellipse(pp, ww, hh), p(dp), k(dk)
+    { }
+    void draw_lines() const;
+    int start() const { return p; }
+    int end() const { return k; }
+private:
+    int p;
+    int k;
+};
+
+class Box {
+public:
+    Box(Point p1, Point p2);
+protected:
+    Box() { }
+private:
+    vector<Line> lines;
+    vector<Arc> arcs;
+};
+
 
 //------------------------------------------------------------------------------
 

@@ -260,6 +260,12 @@ void Ellipse::draw_lines() const
         fl_arc(point(0).x,point(0).y,w+w,h+h,0,360);
 }
 
+void Arc::draw_lines() const
+{
+    if (color().visibility())
+        fl_arc(point(0).x,point(0).y,w+w,h+h,p,k);
+}
+
 //------------------------------------------------------------------------------
 
 void Text::draw_lines() const
