@@ -7,9 +7,9 @@ int main()
     Point tl(1200,250);
     Simple_window win(tl,600,400,"Canvas");
 
-    Closed_polyline cpl = { {100, 100}, {150, 200}, {250, 250}, {300, 200} };
+    Rectangle rect{Point{100,100},300,200};
 
-    win.attach(cpl);
+    win.attach(rect);
     win.set_label("Okno");
     win.wait_for_button();
 }

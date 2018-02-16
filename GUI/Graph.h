@@ -234,6 +234,7 @@ struct Closed_polyline : Open_polyline { // closed sequence of lines
 //------------------------------------------------------------------------------
 
 struct Polygon : Closed_polyline {    // closed sequence of non-intersecting lines
+    using Closed_polyline::Closed_polyline;
     void add(Point p);
     void draw_lines() const;
 };
