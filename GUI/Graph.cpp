@@ -8,6 +8,7 @@
 #include <FL/Fl_JPEG_Image.H>
 #include "Graph.h"
 #include <fstream>
+#include <cmath>
 
 //------------------------------------------------------------------------------
 
@@ -162,6 +163,11 @@ void Polygon::draw_lines() const
     if (number_of_points() < 3) error("less than 3 points in a Polygon");
     Closed_polyline::draw_lines();
 }
+
+Regular_hexagon::Regular_hexagon(Point p, int r):
+    Polygon({Point{p.x+int(0.5*r),p.y- (int) (sqrt(3)/2*r)},Point{p.x-int(0.5*r),p.y- (int) (sqrt(3)/2*r)},Point{p.x-r,p.y},
+            Point{p.x-int(0.5*r),p.y+ (int) (sqrt(3)/2*r)},Point{p.x+int(0.5*r),p.y+ (int) (sqrt(3)/2*r)}, Point{p.x+r,p.y}})
+            { }
 
 //------------------------------------------------------------------------------
 

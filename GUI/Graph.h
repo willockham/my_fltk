@@ -239,6 +239,10 @@ struct Polygon : Closed_polyline {    // closed sequence of non-intersecting lin
     void draw_lines() const;
 };
 
+struct Regular_hexagon : Polygon {
+    Regular_hexagon(Point p, int r);
+};
+
 //------------------------------------------------------------------------------
 
 struct Lines : Shape {                 // related lines
